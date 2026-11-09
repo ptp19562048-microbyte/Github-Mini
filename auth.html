@@ -4,35 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#0d1117" />
-  <meta name="description" content="Conectează-te la Github Mini cu Google sau GitHub." />
-  <title>Autentificare — Github Mini</title>
+  <meta name="description" content="Intră în Github Mini în modul local." />
+  <title>Intrare locală — Github Mini</title>
   <style>
     :root{color-scheme:dark;--bg:#0d1117;--text:#e6edf3;--muted:#9aa7b5;--border:rgba(148,163,184,.22);--blue:#2f81f7}
-    *{box-sizing:border-box}body{min-height:100vh;margin:0;display:grid;place-items:center;padding:24px;color:var(--text);background:radial-gradient(ellipse at 50% 0,rgba(47,129,247,.2),transparent 55%),var(--bg);font:16px/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}.panel{width:min(100%,440px);padding:clamp(24px,6vw,38px);border:1px solid var(--border);border-radius:22px;background:#161b22;box-shadow:0 24px 70px #0006}.brand{display:flex;align-items:center;gap:11px;font-weight:750}.mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(145deg,#fff,#aab7c4);position:relative}.mark:after{content:"";position:absolute;inset:8px;border-radius:4px;background:#111827}h1{margin:28px 0 6px;font-size:2rem;letter-spacing:-.04em}.muted{margin:0 0 24px;color:var(--muted)}.provider{width:100%;min-height:50px;display:flex;justify-content:center;align-items:center;gap:12px;margin-top:12px;padding:11px 16px;border:1px solid var(--border);border-radius:12px;background:#0d1117;color:var(--text);font:inherit;font-weight:650;cursor:pointer}.provider:hover:not(:disabled){border-color:var(--blue);background:#111a27}.provider:disabled{opacity:.5;cursor:not-allowed}.icon{width:20px;font-weight:800;font-size:1.1rem}#status{min-height:25px;margin:16px 0 0;color:#fca5a5;font-size:.92rem}.setup{margin-top:18px;padding:13px 14px;border:1px solid rgba(240,136,62,.35);border-radius:12px;background:rgba(240,136,62,.08);color:#fbd3ad;font-size:.88rem}.setup[hidden],#signed-in[hidden],#providers[hidden]{display:none}.account{margin:18px 0;padding:14px;border:1px solid var(--border);border-radius:12px;overflow-wrap:anywhere;color:var(--muted)}.account strong{color:var(--text)}.back{display:inline-block;margin-top:18px;color:#79c0ff}.back:hover{text-decoration:underline}:focus-visible{outline:3px solid #79c0ff;outline-offset:3px}
+    *{box-sizing:border-box}body{min-height:100vh;margin:0;display:grid;place-items:center;padding:24px;color:var(--text);background:radial-gradient(ellipse at 50% 0,rgba(47,129,247,.2),transparent 55%),var(--bg);font:16px/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}.panel{width:min(100%,440px);padding:clamp(24px,6vw,38px);border:1px solid var(--border);border-radius:22px;background:#161b22;box-shadow:0 24px 70px #0006}.brand{display:flex;align-items:center;gap:11px;font-weight:750;text-decoration:none;color:var(--text)}.mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(145deg,#fff,#aab7c4);position:relative}.mark:after{content:"";position:absolute;inset:8px;border-radius:4px;background:#111827}h1{margin:28px 0 6px;font-size:2rem;letter-spacing:-.04em}.muted{margin:0 0 22px;color:var(--muted)}label{display:block;margin:14px 0 6px;font-size:.92rem;font-weight:650}input{width:100%;min-height:48px;padding:11px 13px;border:1px solid var(--border);border-radius:11px;background:#0d1117;color:var(--text);font:inherit}input:focus{outline:2px solid #79c0ff;outline-offset:2px}.btn{width:100%;min-height:48px;margin-top:16px;border:1px solid #388bfd;border-radius:11px;background:linear-gradient(180deg,#388bfd,#1f6feb);color:white;font:inherit;font-weight:700;cursor:pointer}.note{margin:18px 0 0;padding:12px;border:1px solid rgba(240,136,62,.35);border-radius:11px;background:rgba(240,136,62,.08);color:#fbd3ad;font-size:.87rem}.back{display:inline-block;margin-top:18px;color:#79c0ff;text-decoration:none}.back:hover{text-decoration:underline}:focus-visible{outline:3px solid #79c0ff;outline-offset:3px}
   </style>
 </head>
-<body><main class="panel">
-  <a class="brand" href="./index.html"><span class="mark" aria-hidden="true"></span><span>Github Mini</span></a>
-  <h1>Conectează-te</h1><p class="muted">Alege un cont pentru a continua.</p>
-  <div id="providers"><button class="provider" id="github-login" type="button"><span class="icon" aria-hidden="true">●</span>Continuă cu GitHub</button><button class="provider" id="google-login" type="button"><span class="icon" aria-hidden="true">G</span>Continuă cu Google</button></div>
-  <div id="signed-in" hidden><p>Ești conectat.</p><div class="account" id="account"></div><button class="provider" id="logout" type="button">Deconectare</button></div>
-  <p id="status" role="status" aria-live="polite"></p>
-  <aside class="setup" id="setup" hidden>Autentificarea nu este încă configurată. Editează <code>supabase-config.js</code>, activează Google și GitHub în Supabase Auth Providers și adaugă URL-urile site-ului în redirect URL allowlist. Nu expune cheia <code>service_role</code>.</aside>
-  <a class="back" href="./index.html">← Înapoi la Github Mini</a>
-</main>
-<script type="module">
-  import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-  import { SUPABASE_URL, SUPABASE_ANON_KEY } from './supabase-config.js';
-  const configured=!SUPABASE_URL.includes('YOUR_PROJECT_ID')&&!SUPABASE_ANON_KEY.includes('YOUR_SUPABASE_');
-  const status=document.getElementById('status'),setup=document.getElementById('setup'),providers=document.getElementById('providers'),signedIn=document.getElementById('signed-in');
-  if(!configured){setup.hidden=false;document.querySelectorAll('.provider').forEach(button=>button.disabled=true)}else{
-    const supabase=createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{flowType:'pkce',persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
-    const dashboardUrl=new URL('./dashboard.html',window.location.href).href;
-    const showSession=session=>{if(session?.user){window.location.replace(dashboardUrl);return}providers.hidden=false;signedIn.hidden=true};
-    const signIn=async provider=>{status.textContent='';const{error}=await supabase.auth.signInWithOAuth({provider,options:{redirectTo:window.location.href.split('?')[0]}});if(error)status.textContent=`Autentificarea nu a pornit: ${error.message}`};
-    document.getElementById('github-login').addEventListener('click',()=>signIn('github'));
-    document.getElementById('google-login').addEventListener('click',()=>signIn('google'));
-    supabase.auth.getSession().then(({data,error})=>{if(error)status.textContent=`Nu s-a putut verifica sesiunea: ${error.message}`;showSession(data?.session)});
-    supabase.auth.onAuthStateChange((_event,session)=>showSession(session));
-  }
-</script></body></html>
+<body>
+  <main class="panel">
+    <a class="brand" href="./index.html"><span class="mark" aria-hidden="true"></span><span>Github Mini</span></a>
+    <h1>Intră în spațiul tău</h1>
+    <p class="muted">Alege un nume pentru sesiunea locală de pe acest dispozitiv.</p>
+    <form id="login-form">
+      <label for="display-name">Numele tău</label>
+      <input id="display-name" name="name" type="text" autocomplete="nickname" maxlength="40" placeholder="Ex.: Alex" required />
+      <button class="btn" type="submit">Continuă fără verificare</button>
+    </form>
+    <aside class="note"><strong>Mod local, nu autentificare reală.</strong> Nu se verifică identitatea și nu se contactează Google sau GitHub. Sesiunea și datele se salvează doar în localStorage-ul acestui browser; nu folosi pentru informații private sau protejate.</aside>
+    <a class="back" href="./index.html">← Înapoi la pagina principală</a>
+  </main>
+  <script>
+    const SESSION_KEY = 'github-mini-session';
+    if (localStorage.getItem(SESSION_KEY)) window.location.replace('./dashboard.html');
+    document.getElementById('login-form').addEventListener('submit', event => {
+      event.preventDefault();
+      const name = document.getElementById('display-name').value.trim();
+      if (!name) return;
+      localStorage.setItem(SESSION_KEY, JSON.stringify({ name, createdAt: new Date().toISOString(), mode: 'local-demo' }));
+      window.location.assign('./dashboard.html');
+    });
+  </script>
+</body>
+</html>

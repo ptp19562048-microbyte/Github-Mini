@@ -1,4 +1,3 @@
-// Configurația publică Supabase pentru aplicația din browser.
-// Completează valorile din Project Settings → API. Nu folosi cheia service_role aici.
-export const SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
-export const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY';
+// Github Mini funcționează acum în mod local și nu folosește Supabase.
+// Autentificarea demonstrativă și proiectele sunt stocate în localStorage-ul browserului.
+// Nu pune secrete sau informații private aici; acest fișier poate fi șters.

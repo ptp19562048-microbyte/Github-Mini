@@ -4,29 +4,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#0d1117" />
+  <meta name="description" content="Dashboard local Github Mini." />
   <title>Dashboard — Github Mini</title>
   <style>
     :root{color-scheme:dark;--bg:#0d1117;--panel:#161b22;--text:#e6edf3;--muted:#9aa7b5;--border:rgba(148,163,184,.2);--blue:#2f81f7}
-    *{box-sizing:border-box}body{margin:0;min-width:320px;min-height:100vh;background:radial-gradient(ellipse at 50% -20%,rgba(47,129,247,.18),transparent 55%),var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}.container{width:min(1040px,calc(100% - 32px));margin:auto}.header{border-bottom:1px solid var(--border);background:rgba(13,17,23,.9)}.nav{min-height:68px;display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{font-weight:750;text-decoration:none;color:var(--text)}.btn{display:inline-flex;min-height:42px;align-items:center;justify-content:center;padding:8px 14px;border:1px solid var(--border);border-radius:10px;color:var(--text);background:var(--panel);font:inherit;font-weight:650;cursor:pointer;text-decoration:none}.btn:hover{border-color:var(--blue)}main{padding:56px 0}.welcome{padding:clamp(22px,5vw,40px);border:1px solid var(--border);border-radius:20px;background:rgba(22,27,34,.88)}h1{margin:0;font-size:clamp(2rem,6vw,3.2rem);letter-spacing:-.05em}.muted{color:var(--muted)}.user{margin:22px 0;padding:16px;border:1px solid var(--border);border-radius:13px;overflow-wrap:anywhere}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}.card{padding:18px;border:1px solid var(--border);border-radius:15px;background:#111820}.card h2{font-size:1.1rem;margin:0 0 6px}.card p{margin:0;color:var(--muted)}#message{color:#fca5a5}@media(max-width:650px){.grid{grid-template-columns:1fr}.nav{min-height:62px}}
+    *{box-sizing:border-box}body{margin:0;min-width:320px;min-height:100vh;background:radial-gradient(ellipse at 50% -20%,rgba(47,129,247,.18),transparent 55%),var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}.container{width:min(1040px,calc(100% - 32px));margin:auto}.header{border-bottom:1px solid var(--border);background:rgba(13,17,23,.9)}.nav{min-height:68px;display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-weight:750;text-decoration:none;color:var(--text)}.actions{display:flex;gap:8px}.btn{display:inline-flex;min-height:42px;align-items:center;justify-content:center;padding:8px 13px;border:1px solid var(--border);border-radius:10px;color:var(--text);background:var(--panel);font:inherit;font-weight:650;cursor:pointer;text-decoration:none}.btn:hover{border-color:var(--blue)}main{padding:42px 0 65px}.welcome{padding:clamp(20px,5vw,36px);border:1px solid var(--border);border-radius:20px;background:rgba(22,27,34,.88)}h1{margin:0;font-size:clamp(2rem,6vw,3.2rem);letter-spacing:-.05em}.muted{color:var(--muted)}.mode{display:inline-block;padding:3px 9px;border:1px solid rgba(240,136,62,.35);border-radius:99px;color:#fbd3ad;font-size:.8rem}.form-row{display:flex;gap:9px;margin:18px 0}.form-row input{min-width:0;flex:1;min-height:44px;padding:9px 12px;border:1px solid var(--border);border-radius:10px;background:#0d1117;color:var(--text);font:inherit}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;margin-top:18px}.card{padding:17px;border:1px solid var(--border);border-radius:14px;background:#111820;overflow-wrap:anywhere}.card h2{font-size:1.04rem;margin:0 0 4px}.card p{margin:0;color:var(--muted);font-size:.92rem}.empty{padding:20px;border:1px dashed var(--border);border-radius:13px;color:var(--muted);text-align:center}.tools{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}.tools .btn{font-size:.9rem}.warning{margin-top:20px;padding:13px;border:1px solid rgba(240,136,62,.32);border-radius:12px;color:#fbd3ad;background:rgba(240,136,62,.07);font-size:.88rem}#message{min-height:24px;color:#fca5a5}.remove{margin-top:12px;padding:5px 9px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--muted);cursor:pointer}@media(max-width:600px){.grid{grid-template-columns:1fr}.form-row{flex-direction:column}.actions{gap:5px}.actions .btn{padding:7px 9px;font-size:.85rem}}
   </style>
 </head>
 <body>
-  <header class="header"><div class="container nav"><a class="brand" href="./index.html">◈ Github Mini</a><button class="btn" id="logout" type="button">Deconectare</button></div></header>
-  <main class="container"><section class="welcome"><p class="muted">Spațiul tău de lucru</p><h1>Bun venit, <span id="name">developer</span>!</h1><p class="muted">Ești conectat. Acesta este dashboard-ul tău Github Mini.</p><div class="user" id="user"></div><p id="message" role="status" aria-live="polite"></p><div class="grid"><article class="card"><h2>Proiecte</h2><p>Conectează-te și începe să-ți organizezi proiectele.</p></article><article class="card"><h2>Activitate</h2><p>Un singur loc pentru progresul și noutățile tale.</p></article><article class="card"><h2>Colaborare</h2><p>Continuă să construiești împreună cu echipa ta.</p></article></div></section></main>
-  <script type="module">
-    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-    import { SUPABASE_URL, SUPABASE_ANON_KEY } from './supabase-config.js';
-    const configured=!SUPABASE_URL.includes('YOUR_PROJECT_ID')&&!SUPABASE_ANON_KEY.includes('YOUR_SUPABASE_');
+  <header class="header"><div class="container nav"><a class="brand" href="./index.html">◈ Github Mini</a><div class="actions"><a class="btn" href="./index.html">Acasă</a><button class="btn" id="logout" type="button">Ieși</button></div></div></header>
+  <main class="container"><section class="welcome">
+    <span class="mode">Mod local · fără verificare</span>
+    <p class="muted">Spațiul tău de lucru</p><h1>Bun venit, <span id="name">developer</span>!</h1>
+    <p class="muted">Datele proiectelor de mai jos se salvează în localStorage pe acest browser.</p>
+    <form class="form-row" id="project-form"><input id="project-name" maxlength="80" placeholder="Numele unui proiect nou" aria-label="Numele proiectului" required /><button class="btn" type="submit">+ Adaugă proiect</button></form>
+    <p id="message" role="status" aria-live="polite"></p><div id="projects" class="grid"></div>
+    <div class="tools"><button class="btn" id="export" type="button">Descarcă backup JSON</button><button class="btn" id="import-button" type="button">Importă backup JSON</button><input id="import-file" type="file" accept="application/json,.json" hidden /></div>
+    <aside class="warning"><strong>Notă:</strong> aceasta este o sesiune demonstrativă locală, nu login Google/GitHub. localStorage nu este protejat și este separat pentru fiecare browser/dispozitiv. Exportă un backup pentru a muta datele; fișierul este JSON, nu ZIP.</aside>
+  </section></main>
+  <script>
+    const SESSION_KEY='github-mini-session', DATA_KEY='github-mini-data';
     const message=document.getElementById('message');
-    if(!configured){message.textContent='Configurează mai întâi URL-ul și cheia publică Supabase în supabase-config.js.';document.getElementById('logout').hidden=true}
-    else{
-      const supabase=createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{flowType:'pkce',persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
-      const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
-      const render=({user})=>{if(!user){window.location.replace(new URL('./auth.html',window.location.href));return}const name=user.user_metadata?.full_name||user.user_metadata?.name||user.email||'developer';document.getElementById('name').textContent=name;document.getElementById('user').innerHTML=`<strong>${escapeHtml(name)}</strong><br><span class="muted">${escapeHtml(user.email||'')}</span>`};
-      supabase.auth.getUser().then(({data,error})=>{if(error){message.textContent=`Nu s-a putut verifica sesiunea: ${error.message}`;return}if(data.user)render(data);else window.location.replace(new URL('./auth.html',window.location.href))});
-      supabase.auth.onAuthStateChange((_event,session)=>{if(session?.user)render(session);else window.location.replace(new URL('./auth.html',window.location.href))});
-      document.getElementById('logout').addEventListener('click',async()=>{const{error}=await supabase.auth.signOut();if(error)message.textContent=`Deconectarea a eșuat: ${error.message}`});
-    }
+    let session;
+    try { session=JSON.parse(localStorage.getItem(SESSION_KEY)||'null'); } catch { session=null; }
+    if(!session?.name) window.location.replace('./auth.html');
+    else document.getElementById('name').textContent=session.name;
+
+    const readProjects=()=>{try{const value=JSON.parse(localStorage.getItem(DATA_KEY)||'[]');return Array.isArray(value)?value:[]}catch{return []}};
+    let projects=readProjects();
+    const save=()=>localStorage.setItem(DATA_KEY,JSON.stringify(projects));
+    const render=()=>{
+      const root=document.getElementById('projects'); root.replaceChildren();
+      if(!projects.length){const empty=document.createElement('div');empty.className='empty';empty.textContent='Încă nu ai proiecte. Adaugă unul mai sus.';root.append(empty);return}
+      projects.forEach((project,index)=>{
+        const card=document.createElement('article');card.className='card';
+        const title=document.createElement('h2');title.textContent=project.name;
+        const detail=document.createElement('p');detail.textContent=`Adăugat local · ${new Date(project.createdAt).toLocaleDateString()}`;
+        const remove=document.createElement('button');remove.type='button';remove.className='remove';remove.textContent='Șterge proiect';remove.addEventListener('click',()=>{projects.splice(index,1);save();render()});
+        card.append(title,detail,remove);root.append(card);
+      });
+    };
+    render();
+    document.getElementById('project-form').addEventListener('submit',event=>{event.preventDefault();const input=document.getElementById('project-name');const name=input.value.trim();if(!name)return;projects.unshift({name,createdAt:new Date().toISOString()});save();input.value='';message.textContent='Proiect salvat pe acest dispozitiv.';render()});
+    document.getElementById('logout').addEventListener('click',()=>{localStorage.removeItem(SESSION_KEY);window.location.replace('./auth.html')});
+    document.getElementById('export').addEventListener('click',()=>{const backup={format:'github-mini-local-backup',version:1,exportedAt:new Date().toISOString(),session,projects};const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='github-mini-backup.json';link.click();URL.revokeObjectURL(url)});
+    document.getElementById('import-button').addEventListener('click',()=>document.getElementById('import-file').click());
+    document.getElementById('import-file').addEventListener('change',async event=>{const file=event.target.files?.[0];if(!file)return;try{const backup=JSON.parse(await file.text());if(backup.format!=='github-mini-local-backup'||!Array.isArray(backup.projects)||backup.projects.some(item=>typeof item?.name!=='string'))throw new Error('Format de backup invalid.');projects=backup.projects;save();render();message.textContent='Backup importat.'}catch(error){message.textContent=error.message||'Nu s-a putut importa backup-ul.'}finally{event.target.value=''}});
   </script>
 </body>
 </html>
