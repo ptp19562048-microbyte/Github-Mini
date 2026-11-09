@@ -4,294 +4,141 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#0d1117" />
-  <meta name="description" content="Dashboard local Github Mini pentru proiecte, task-uri și repo-uri." />
-  <title>Dashboard — Github Mini</title>
+  <meta name="description" content="Github Mini — home, feed, explore, news și tutoriale de coding, cu date locale." />
+  <title>Github Mini — Home</title>
   <style>
-    :root{color-scheme:dark;--bg:#0d1117;--panel:#171d2a;--panel-strong:#111827;--soft:#0d1520;--text:#e6edf3;--muted:#9aa7b5;--border:rgba(148,163,184,.2);--blue:#2f81f7;--green:#3fb950;--yellow:#fbbf24;--orange:#f0883e;--danger:#f87171;--shadow:0 18px 42px rgba(0,0,0,.38)}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-width:320px;min-height:100vh;background:radial-gradient(circle at top,rgba(47,129,247,.18),transparent 28%),var(--bg);color:var(--text);font:16px/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}a{text-decoration:none;color:inherit}button,input{font:inherit}input{color:var(--text)}.container{width:min(1200px,calc(100% - 24px));margin:auto}.header{background:rgba(13,17,23,.9);border-bottom:1px solid var(--border);backdrop-filter:blur(10px)}.nav{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:10px;font-weight:800}.brand-mark{position:relative;width:28px;height:28px;border-radius:8px;background:linear-gradient(145deg,#fff,#aab7c4)}.brand-mark:after{content:"";position:absolute;inset:7px;border-radius:4px;background:#111827}.actions{display:flex;align-items:center;gap:8px}.btn{display:inline-flex;min-height:42px;align-items:center;justify-content:center;padding:9px 14px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,.02);color:var(--text);font-weight:650;cursor:pointer}.btn:hover{border-color:rgba(47,129,247,.8)}.btn.primary{background:linear-gradient(180deg,#388bfd,#1f6feb);border-color:#388bfd}.main{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:calc(100vh - 68px)}.sidebar{padding:18px 14px;border-right:1px solid var(--border);background:rgba(15,23,42,.55)}.profile{padding:14px;border:1px solid var(--border);border-radius:16px;background:rgba(17,24,39,.8);margin-bottom:16px}.profile strong{display:block;margin-bottom:5px}.profile .meta{color:var(--muted);font-size:.88rem}.nav-list{display:flex;flex-direction:column;gap:8px}.nav-item{padding:10px 12px;border-radius:10px;color:var(--muted);border:1px solid transparent}.nav-item.active{color:var(--text);background:rgba(47,129,247,.08);border-color:rgba(47,129,247,.2)}.content{padding:28px 20px 40px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:18px}.topbar h1{margin:0;font-size:clamp(2rem,5vw,3rem);letter-spacing:-.05em}.pill{display:inline-flex;align-items:center;padding:4px 9px;border:1px solid rgba(240,136,62,.38);border-radius:999px;background:rgba(240,136,62,.08);color:#fbd3ad;font-size:.76rem;font-weight:700}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}.stat{padding:16px;border:1px solid var(--border);border-radius:16px;background:rgba(22,27,34,.82)}.stat-label{color:var(--muted);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}.stat strong{display:block;font-size:clamp(1.4rem,2vw,2.1rem);margin-top:8px}.layout{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}.panel{padding:18px;border:1px solid var(--border);border-radius:18px;background:rgba(22,27,34,.82);box-shadow:var(--shadow)}.panel h2{margin:0 0 12px;font-size:1.08rem}.form-grid{display:grid;grid-template-columns:1fr auto;gap:10px}.field{width:100%;min-height:44px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#0d1117}.field:focus{outline:2px solid #79c0ff;outline-offset:2px}.add-btn{min-width:120px}.list{display:flex;flex-direction:column;gap:10px;margin-top:12px}.item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:rgba(17,24,39,.8)}.item strong{display:block}.item small{color:var(--muted)}.remove{padding:6px 8px;border:1px solid var(--border);background:transparent;color:var(--muted);border-radius:8px;cursor:pointer}.tag{display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;border:1px solid var(--border);font-size:.72rem;font-weight:700}.tag.green{color:#a7f3d0;border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.08)}.tag.orange{color:#fdba74;border-color:rgba(240,136,62,.35);background:rgba(240,136,62,.08)}.tag.red{color:#fca5a5;border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.08)}.repo-list{display:flex;flex-direction:column;gap:10px}.repo-item{padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:rgba(17,24,39,.8)}.repo-item strong{display:block}.repo-item small{color:var(--muted)}.footer-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.warning{margin-top:16px;padding:12px;border:1px solid rgba(240,136,62,.3);border-radius:10px;background:rgba(240,136,62,.08);color:#fbd3ad;font-size:.86rem}.activity-list{display:flex;flex-direction:column;gap:10px}.activity{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:rgba(17,24,39,.8)}.activity strong{display:block}.activity small{color:var(--muted)}.empty{padding:12px;border:1px dashed var(--border);border-radius:12px;color:var(--muted);text-align:center}.message{min-height:24px;color:#fca5a5;margin:0 0 8px}.hidden-input{display:none}@media(max-width:900px){.main{grid-template-columns:1fr}.sidebar{border-right:0;border-bottom:1px solid var(--border)}.stats{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}}@media(max-width:520px){.topbar{flex-direction:column;align-items:flex-start}.stats{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.actions{gap:6px}.btn{padding:8px 10px}} 
+    :root{color-scheme:dark;--bg:#0d1117;--panel:#161b22;--panel2:#111820;--text:#e6edf3;--muted:#9aa7b5;--border:rgba(148,163,184,.2);--blue:#2f81f7;--green:#3fb950;--orange:#f0883e;--red:#f87171;--shadow:0 16px 38px #0005;--radius:15px}
+    :root.light{color-scheme:light;--bg:#f6f8fa;--panel:#fff;--panel2:#f6f8fa;--text:#1f2328;--muted:#59636e;--border:rgba(31,35,40,.18);--blue:#0969da;--green:#1a7f37;--orange:#bc4c00;--red:#cf222e;--shadow:0 10px 28px #1f23281a}
+    *{box-sizing:border-box}body{margin:0;min-width:320px;background:var(--bg);color:var(--text);font:15px/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,textarea,select{font:inherit}a{color:inherit;text-decoration:none}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}.topinner{max-width:1440px;margin:auto;padding:0 20px;min-height:64px;display:flex;align-items:center;gap:14px}.brand{display:flex;align-items:center;gap:10px;font-weight:800;white-space:nowrap}.logo{width:29px;height:29px;border-radius:9px;background:linear-gradient(145deg,#fff,#aab7c4);position:relative}.logo:after{content:"";position:absolute;inset:8px;border-radius:4px;background:#111827}.search{position:relative;flex:1;max-width:460px;margin-left:12px}.search input{width:100%;height:38px;border:1px solid var(--border);border-radius:8px;background:var(--panel2);color:var(--text);padding:7px 12px 7px 35px}.search:before{content:"⌕";position:absolute;left:12px;top:3px;font-size:23px;color:var(--muted)}.top-actions{margin-left:auto;display:flex;gap:8px;align-items:center}.icon-btn,.button{min-height:36px;border:1px solid var(--border);border-radius:8px;background:var(--panel);color:var(--text);padding:7px 11px;cursor:pointer}.icon-btn{width:38px;padding:4px;font-size:17px}.button:hover,.icon-btn:hover{border-color:var(--blue)}.button.primary{background:var(--blue);border-color:var(--blue);color:white}.layout{max-width:1440px;margin:auto;display:grid;grid-template-columns:235px minmax(0,1fr);min-height:calc(100vh - 64px)}.sidebar{padding:20px 14px;border-right:1px solid var(--border);background:var(--panel)}.profile{padding:12px;margin-bottom:16px;border:1px solid var(--border);border-radius:12px;background:var(--panel2);overflow-wrap:anywhere}.profile strong{display:block}.profile small{color:var(--muted)}.navlist{display:grid;gap:4px}.navlink{display:flex;align-items:center;gap:11px;width:100%;padding:9px 11px;border:1px solid transparent;border-radius:8px;background:none;color:var(--muted);text-align:left;cursor:pointer}.navlink .symbol{width:20px;text-align:center;font-size:16px}.navlink:hover,.navlink.active{color:var(--text);background:color-mix(in srgb,var(--blue) 10%,var(--panel));border-color:color-mix(in srgb,var(--blue) 24%,var(--border))}.nav-label{margin:19px 10px 6px;color:var(--muted);font-size:11px;font-weight:750;letter-spacing:.09em;text-transform:uppercase}.side-note{margin-top:22px;padding:11px;border:1px solid var(--border);border-radius:10px;color:var(--muted);font-size:12px}.content{min-width:0;padding:27px clamp(15px,3vw,38px) 60px}.page{display:none;max-width:1100px;margin:0 auto}.page.active{display:block}.pagehead{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:20px}.pagehead h1{margin:0;font-size:clamp(25px,4vw,36px);letter-spacing:-.045em}.sub{color:var(--muted);margin:5px 0 0}.row{display:flex;align-items:center;gap:9px}.card{padding:18px;border:1px solid var(--border);border-radius:var(--radius);background:var(--panel);box-shadow:var(--shadow)}.card h2,.card h3{margin:0 0 11px}.card p{color:var(--muted)}.grid{display:grid;gap:15px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:18px 0}.stat{padding:14px;border:1px solid var(--border);border-radius:12px;background:var(--panel)}.stat span{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.06em}.stat strong{display:block;font-size:24px;margin-top:3px}.formrow{display:flex;gap:8px;margin:10px 0}.field{width:100%;min-width:0;min-height:40px;padding:8px 11px;border:1px solid var(--border);border-radius:8px;background:var(--panel2);color:var(--text)}textarea.field{min-height:90px;resize:vertical}.field:focus{outline:2px solid color-mix(in srgb,var(--blue) 65%,transparent);outline-offset:1px}.list{display:grid;gap:9px;margin-top:12px}.listitem{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--panel2)}.listitem strong{display:block;overflow-wrap:anywhere}.listitem small{color:var(--muted)}.tag{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font-size:11px;font-weight:700;white-space:nowrap}.tag.green{color:var(--green)}.tag.orange{color:var(--orange)}.tag.red{color:var(--red)}.action{border:1px solid var(--border);border-radius:7px;background:transparent;color:var(--muted);padding:5px 8px;cursor:pointer}.action:hover{color:var(--text);border-color:var(--blue)}.empty{padding:18px;border:1px dashed var(--border);border-radius:10px;color:var(--muted);text-align:center}.hero{padding:25px;border:1px solid var(--border);border-radius:18px;background:radial-gradient(ellipse at 85% 0,color-mix(in srgb,var(--blue) 20%,transparent),transparent 45%),var(--panel);box-shadow:var(--shadow)}.hero h2{font-size:clamp(25px,4vw,38px);letter-spacing:-.04em;margin:0}.hero p{max-width:650px;color:var(--muted)}.feeditem{display:grid;grid-template-columns:36px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--border)}.feeditem:last-child{border-bottom:0}.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--blue) 22%,var(--panel));font-weight:800}.feeditem p{margin:4px 0;color:var(--muted)}.feeditem small{color:var(--muted)}.repo-card{min-height:145px}.repo-title{display:flex;justify-content:space-between;gap:10px}.repo-title h3{margin:0;overflow-wrap:anywhere}.repo-card p{margin:9px 0}.news-card{border-left:3px solid var(--blue)}.lesson{cursor:pointer;transition:transform .15s ease}.lesson:hover{transform:translateY(-2px);border-color:var(--blue)}.lesson .number{font-size:12px;color:var(--blue);font-weight:800;text-transform:uppercase}.lesson h3{margin:6px 0}.codeblock{overflow:auto;padding:14px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);font:13px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--text);white-space:pre}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.statusline{min-height:24px;color:var(--green);font-size:13px}.progress{height:8px;border-radius:99px;background:var(--panel2);overflow:hidden}.progress i{display:block;height:100%;background:var(--green);width:0}.disclaimer{padding:11px 12px;border:1px solid color-mix(in srgb,var(--orange) 35%,var(--border));border-radius:10px;background:color-mix(in srgb,var(--orange) 8%,var(--panel));color:var(--muted);font-size:12px}.mobile-menu{display:none}
+    @media(max-width:980px){.layout{grid-template-columns:1fr}.sidebar{position:sticky;top:64px;z-index:9;border-right:0;border-bottom:1px solid var(--border);padding:7px 12px;overflow-x:auto}.profile,.nav-label,.side-note{display:none}.navlist{display:flex;gap:4px;min-width:max-content}.navlink{width:auto;padding:8px 10px}.navlink .symbol{width:auto}.navlink span:last-child{display:inline}.stats{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:620px){.topinner{padding:0 10px;gap:8px}.brand span:last-child{display:none}.search{margin-left:0}.top-actions .button{display:none}.layout{min-height:calc(100vh - 64px)}.content{padding:20px 12px 45px}.grid.two,.grid.three{grid-template-columns:1fr}.stats{gap:8px}.stat{padding:11px}.stat strong{font-size:20px}.pagehead{flex-direction:column}.formrow{flex-direction:column}.listitem{align-items:flex-start}.top-actions{gap:5px}.icon-btn{width:35px}.navlink{font-size:13px;padding:8px}.navlink .symbol{font-size:14px}.hero{padding:18px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
 <body>
-  <header class="header"><div class="container nav"><a class="brand" href="./index.html"><span class="brand-mark" aria-hidden="true"></span><span>Github Mini</span></a><div class="actions"><button class="btn primary" id="logout" type="button">Ieși</button></div></div></header>
-  <div class="container main">
-    <aside class="sidebar">
-      <div class="profile"><strong id="user-name">Utilizator</strong><div class="meta">Mod local · fără verificare</div></div>
-      <nav class="nav-list">
-        <div class="nav-item active">Overview</div>
-        <div class="nav-item">Projects</div>
-        <div class="nav-item">Tasks</div>
-        <div class="nav-item">Activity</div>
-      </nav>
-    </aside>
-    <main class="content">
-      <div class="topbar"><h1>Dashboard</h1><span class="pill">Local demo</span></div>
-      <p class="message" id="message" role="status" aria-live="polite"></p>
-      <section class="stats">
-        <div class="stat"><div class="stat-label">Proiecte</div><strong id="count-projects">0</strong></div>
-        <div class="stat"><div class="stat-label">Task-uri</div><strong id="count-tasks">0</strong></div>
-        <div class="stat"><div class="stat-label">Repo-uri</div><strong id="count-repos">0</strong></div>
-        <div class="stat"><div class="stat-label">Status</div><strong>Live</strong></div>
-      </section>
-      <section class="layout">
-        <div>
-          <div class="panel">
-            <h2>Adaugă proiect</h2>
-            <form id="project-form"><div class="form-grid"><input class="field" id="project-name" type="text" maxlength="80" placeholder="Numele proiectului" required /><button class="btn primary add-btn" type="submit">Adaugă</button></div></form>
-            <div class="list" id="project-list"></div>
-            <div class="footer-actions"><button class="btn" id="export" type="button">Exportă backup</button><button class="btn" id="import-btn" type="button">Importă backup</button><input class="hidden-input" id="import-file" type="file" accept="application/json,.json" /></div>
-            <div class="warning">Datele sunt stocate local în browser. Exportă backup-ul dacă vrei să-l păstrezi.</div>
-          </div>
-        </div>
-        <div>
-          <div class="panel">
-            <h2>Adaugă task</h2>
-            <form id="task-form"><div class="form-grid"><input class="field" id="task-name" type="text" maxlength="80" placeholder="Task nou" required /><button class="btn primary add-btn" type="submit">Salvează</button></div></form>
-            <div class="list" id="task-list"></div>
-          </div>
-          <div class="panel" style="margin-top:16px;">
-            <h2>Repo-uri</h2>
-            <div class="repo-list" id="repo-list"></div>
-          </div>
-          <div class="panel" style="margin-top:16px;">
-            <h2>Activitate recentă</h2>
-            <div class="activity-list" id="activity-list"></div>
-          </div>
-        </div>
-      </section>
-    </main>
+  <div class="shell">
+    <header class="topbar"><div class="topinner">
+      <a class="brand" href="#home" aria-label="Github Mini Home"><span class="logo" aria-hidden="true"></span><span>Github Mini</span></a>
+      <label class="search"><input id="global-search" type="search" placeholder="Caută repouri, task-uri, feed..." aria-label="Caută în Github Mini" /></label>
+      <div class="top-actions"><button class="button" id="new-button" type="button">＋ Nou</button><button class="icon-btn" id="theme-button" type="button" aria-label="Schimbă tema">☼</button><button class="icon-btn" id="logout" type="button" aria-label="Ieși din sesiunea locală">↪</button></div>
+    </div></header>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="profile"><strong id="user-name">Utilizator</strong><small>Demo local · date pe acest browser</small></div>
+        <div class="nav-label">Meniu</div>
+        <nav class="navlist" id="navigation" aria-label="Navigare principală">
+          <button class="navlink active" data-page="home"><span class="symbol">⌂</span><span>Home</span></button>
+          <button class="navlink" data-page="feed"><span class="symbol">▤</span><span>Feed</span></button>
+          <button class="navlink" data-page="explore"><span class="symbol">⌕</span><span>Explore</span></button>
+          <button class="navlink" data-page="news"><span class="symbol">◉</span><span>News</span></button>
+          <button class="navlink" data-page="tutorial"><span class="symbol">⌘</span><span>Tutorial for coding</span></button>
+          <div class="nav-label">Dezvoltare</div>
+          <button class="navlink" data-page="repositories"><span class="symbol">▣</span><span>Repositories</span></button>
+          <button class="navlink" data-page="issues"><span class="symbol">◎</span><span>Issues</span></button>
+          <button class="navlink" data-page="pulls"><span class="symbol">⑂</span><span>Pull requests</span></button>
+          <button class="navlink" data-page="projects"><span class="symbol">▦</span><span>Projects & tasks</span></button>
+        </nav>
+        <div class="side-note">Github Mini este un prototip independent, local. Nu este afiliat cu GitHub.</div>
+      </aside>
+      <main class="content">
+        <section class="page active" id="page-home">
+          <div class="pagehead"><div><h1>Home</h1><p class="sub">Bun venit, <strong id="welcome-name">developer</strong>. Spațiul tău de lucru, într-un singur loc.</p></div><span class="tag orange">LOCAL DEMO</span></div>
+          <div class="hero"><h2>Ce construim azi?</h2><p>Urmărește repourile, ține pasul cu activitatea și învață codare cu tutoriale practice. Totul se salvează local în browser.</p><div class="row"><button class="button primary" data-goto="repositories">＋ Creează repo</button><button class="button" data-goto="tutorial">Începe tutorialul</button></div></div>
+          <div class="stats"><div class="stat"><span>Repositories</span><strong id="stat-repos">0</strong></div><div class="stat"><span>Issues deschise</span><strong id="stat-issues">0</strong></div><div class="stat"><span>Pull requests</span><strong id="stat-pulls">0</strong></div><div class="stat"><span>Tutoriale terminate</span><strong id="stat-lessons">0</strong></div></div>
+          <div class="grid two"><article class="card"><h2>Repo-uri recente</h2><div class="list" id="home-repos"></div></article><article class="card"><h2>Activitate recentă</h2><div id="home-activity"></div></article></div>
+        </section>
+        <section class="page" id="page-feed"><div class="pagehead"><div><h1>Feed</h1><p class="sub">Activitatea locală din workspace-ul tău.</p></div><button class="button" id="clear-feed" type="button">Șterge feed-ul</button></div><div class="card" id="feed-list"></div></section>
+        <section class="page" id="page-explore"><div class="pagehead"><div><h1>Explore</h1><p class="sub">Explorează repouri demonstrative și găsește idei pentru proiecte.</p></div></div><div class="toolbar"><input class="field" id="explore-search" type="search" placeholder="Filtrează repourile..." /></div><div class="grid two" id="explore-grid"></div><p class="disclaimer" style="margin-top:14px">Repo-urile afișate sunt exemple locale, nu date live de pe GitHub.</p></section>
+        <section class="page" id="page-news"><div class="pagehead"><div><h1>News</h1><p class="sub">Noutăți și note de produs pentru demo-ul Github Mini.</p></div></div><div class="grid two" id="news-grid"></div><p class="disclaimer" style="margin-top:14px">Acestea sunt știri demo incluse în aplicație; nu sunt actualizări oficiale GitHub.</p></section>
+        <section class="page" id="page-tutorial"><div class="pagehead"><div><h1>Tutorial for coding</h1><p class="sub">Lecții scurte pentru a începe să construiești pe web.</p></div></div><div class="card" style="margin-bottom:15px"><div class="row" style="justify-content:space-between"><strong>Progresul tău</strong><span id="progress-label" class="sub">0 / 0</span></div><div class="progress" style="margin-top:10px"><i id="progress-bar"></i></div></div><div class="grid two" id="lesson-grid"></div><article class="card" id="lesson-detail" hidden style="margin-top:15px"></article></section>
+        <section class="page" id="page-repositories"><div class="pagehead"><div><h1>Repositories</h1><p class="sub">Creează și administrează repo-uri locale.</p></div><button class="button" id="repo-new-focus" type="button">＋ Repo nou</button></div><div class="card"><form id="repo-form"><div class="grid two"><input class="field" id="repo-name" maxlength="60" placeholder="nume-repo" required /><select class="field" id="repo-visibility"><option value="Public">Public</option><option value="Private">Private</option></select></div><input class="field" id="repo-description" maxlength="140" placeholder="Descriere (opțional)" style="margin-top:9px" /><div class="row" style="margin-top:10px"><button class="button primary" type="submit">Creează repository</button></div></form></div><div class="grid two" id="repo-grid" style="margin-top:15px"></div></section>
+        <section class="page" id="page-issues"><div class="pagehead"><div><h1>Issues</h1><p class="sub">Urmărește bug-uri și idei local.</p></div></div><div class="card"><form id="issue-form"><div class="grid two"><input class="field" id="issue-title" maxlength="100" placeholder="Titlul issue-ului" required /><select class="field" id="issue-repo"></select></div><div class="row" style="margin-top:10px"><button class="button primary" type="submit">＋ Deschide issue</button></div></form></div><div class="list" id="issue-list"></div></section>
+        <section class="page" id="page-pulls"><div class="pagehead"><div><h1>Pull requests</h1><p class="sub">Notează schimbările propuse și starea revizuirii.</p></div></div><div class="card"><form id="pull-form"><div class="grid two"><input class="field" id="pull-title" maxlength="100" placeholder="Titlul pull request-ului" required /><select class="field" id="pull-repo"></select></div><div class="row" style="margin-top:10px"><button class="button primary" type="submit">＋ Creează pull request</button></div></form></div><div class="list" id="pull-list"></div></section>
+        <section class="page" id="page-projects"><div class="pagehead"><div><h1>Projects & tasks</h1><p class="sub">Listează proiecte și bifează task-urile tale.</p></div></div><div class="grid two"><article class="card"><h2>Proiect nou</h2><form id="project-form"><div class="formrow"><input class="field" id="project-name" maxlength="80" placeholder="Numele proiectului" required /><button class="button primary" type="submit">Adaugă</button></div></form><div class="list" id="project-list"></div></article><article class="card"><h2>Task nou</h2><form id="task-form"><div class="formrow"><input class="field" id="task-name" maxlength="100" placeholder="Ce ai de făcut?" required /><button class="button primary" type="submit">Adaugă</button></div></form><div class="list" id="task-list"></div></article></div></section>
+        <section class="page" id="page-settings"><div class="pagehead"><div><h1>Settings & backup</h1><p class="sub">Schimbă tema și mută datele prin fișier JSON.</p></div></div><div class="card"><h2>Aspect</h2><p class="sub">Alege tema aplicației.</p><button class="button" id="settings-theme" type="button">Schimbă tema</button></div><div class="card" style="margin-top:15px"><h2>Backup local</h2><p class="sub">Exportă sau importă repouri, issues, pull requests, proiecte, task-uri, feed și progresul tutorialelor.</p><div class="toolbar"><button class="button primary" id="export" type="button">Descarcă backup JSON</button><button class="button" id="import-button" type="button">Importă backup JSON</button><input id="import-file" type="file" accept="application/json,.json" hidden /></div><p class="disclaimer">Datele nu se sincronizează între dispozitive și nu sunt protejate de autentificare. Nu salva secrete sau informații sensibile.</p></div></section>
+        <p class="statusline" id="status" role="status" aria-live="polite"></p>
+      </main>
+    </div>
   </div>
   <script>
-    const SESSION_KEY = 'github-mini-session';
-    const PROJECT_KEY = 'github-mini-projects';
-    const TASK_KEY = 'github-mini-tasks';
-    const REPO_KEY = 'github-mini-repos';
-    const ACTIVITY_KEY = 'github-mini-activity';
+    (() => {
+      'use strict';
+      const KEY='github-mini-workspace-v2', SESSION_KEY='github-mini-session', THEME_KEY='github-mini-theme';
+      const readSession=()=>{try{return JSON.parse(localStorage.getItem(SESSION_KEY)||'null')}catch{return null}};
+      const session=readSession();
+      if(!session?.name){window.location.replace('./auth.html');return;}
+      document.getElementById('user-name').textContent=session.name;
+      document.getElementById('welcome-name').textContent=session.name;
+      const now=()=>new Date().toISOString();
+      const initial={repos:[{id:crypto.randomUUID(),name:'github-mini/ui',description:'UI components for the local mini workspace.',visibility:'Public',createdAt:now(),language:'HTML'},{id:crypto.randomUUID(),name:'github-mini/learn',description:'Small coding lessons and experiments.',visibility:'Public',createdAt:now(),language:'JavaScript'}],issues:[{id:crypto.randomUUID(),title:'Make the dashboard responsive',repo:'github-mini/ui',open:true,createdAt:now()}],pulls:[],projects:[{id:crypto.randomUUID(),name:'Github Mini',createdAt:now()}],tasks:[{id:crypto.randomUUID(),name:'Explore the dashboard',done:false,createdAt:now()}],activity:[],completedLessons:[],theme:'dark'};
+      const load=()=>{try{const value=JSON.parse(localStorage.getItem(KEY)||'null');if(!value||typeof value!=='object')return initial;return {...initial,...value,repos:Array.isArray(value.repos)?value.repos:initial.repos,issues:Array.isArray(value.issues)?value.issues:[],pulls:Array.isArray(value.pulls)?value.pulls:[],projects:Array.isArray(value.projects)?value.projects:[],tasks:Array.isArray(value.tasks)?value.tasks:[],activity:Array.isArray(value.activity)?value.activity:[],completedLessons:Array.isArray(value.completedLessons)?value.completedLessons:[]}}catch{return initial}};
+      let data=load();
+      const $=id=>document.getElementById(id);
+      const safe=(s)=>String(s??'');
+      const el=(tag,className,text)=>{const node=document.createElement(tag);if(className)node.className=className;if(text!==undefined)node.textContent=safe(text);return node};
+      const persist=()=>{try{localStorage.setItem(KEY,JSON.stringify(data));localStorage.setItem(THEME_KEY,data.theme||'dark')}catch{$('status').textContent='Stocarea locală este plină sau indisponibilă.'}};
+      const log=(title,detail)=>{data.activity.unshift({id:crypto.randomUUID(),title,detail,createdAt:now()});data.activity=data.activity.slice(0,100);persist()};
+      const empty=(host,text)=>host.appendChild(el('div','empty',text));
+      const makeButton=(text,action,cls='action')=>{const b=el('button',cls,text);b.type='button';b.addEventListener('click',action);return b};
+      const makeItem=(title,detail,actions=[])=>{const row=el('div','listitem'),left=el('div'),strong=el('strong', '',title),small=el('small','',detail);left.append(strong,small);row.append(left,...actions);return row};
+      const timeLabel=value=>{const d=new Date(value);return Number.isNaN(d.getTime())?'recent':d.toLocaleString()};
 
-    const defaultRepos = [
-      { name: 'github-mini/ui', status: 'Activ', type: 'green' },
-      { name: 'github-mini/api', status: 'În lucru', type: 'orange' },
-      { name: 'github-mini/cli', status: 'Nou', type: 'green' }
-    ];
+      const setPage=name=>{document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));document.querySelectorAll('.navlink').forEach(b=>b.classList.toggle('active',b.dataset.page===name));const title={home:'Home',feed:'Feed',explore:'Explore',news:'News',tutorial:'Tutorial for coding',repositories:'Repositories',issues:'Issues',pulls:'Pull requests',projects:'Projects & tasks',settings:'Settings'}[name]||'Home';document.title=`${title} — Github Mini`;window.scrollTo({top:0,behavior:'smooth'});};
+      document.querySelectorAll('.navlink').forEach(b=>b.addEventListener('click',()=>setPage(b.dataset.page)));
+      document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>setPage(b.dataset.goto)));
+      $('new-button').addEventListener('click',()=>setPage('repositories'));
+      $('logout').addEventListener('click',()=>{localStorage.removeItem(SESSION_KEY);window.location.replace('./auth.html')});
+      const applyTheme=()=>{document.documentElement.classList.toggle('light',data.theme==='light');$('theme-button').textContent=data.theme==='light'?'☾':'☼'};
+      const toggleTheme=()=>{data.theme=data.theme==='light'?'dark':'light';persist();applyTheme()};
+      $('theme-button').addEventListener('click',toggleTheme);$('settings-theme').addEventListener('click',toggleTheme);
+      applyTheme();
 
-    const getSession = () => {
-      try { return JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); }
-      catch { return null; }
-    };
-
-    const getArray = (key, fallback) => {
-      try {
-        const value = JSON.parse(localStorage.getItem(key) || 'null');
-        return Array.isArray(value) ? value : fallback;
-      } catch {
-        return fallback;
-      }
-    };
-
-    const session = getSession();
-    if (!session?.name) {
-      window.location.replace('./auth.html');
-    }
-
-    const userName = document.getElementById('user-name');
-    userName.textContent = session?.name || 'Utilizator';
-
-    let projects = getArray(PROJECT_KEY, [{ name: 'Github Mini v1', createdAt: new Date().toISOString() }]);
-    let tasks = getArray(TASK_KEY, [
-      { name: 'Componente dashboard responsive', createdAt: new Date().toISOString(), done: true },
-      { name: 'Îmbunătățire login local', createdAt: new Date().toISOString(), done: false },
-      { name: 'Export backup JSON', createdAt: new Date().toISOString(), done: false }
-    ]);
-    let repos = getArray(REPO_KEY, defaultRepos);
-    let activity = getArray(ACTIVITY_KEY, [
-      { title: 'UI refactor', detail: 'Componentele responsive au fost finalizate.', createdAt: new Date().toISOString() },
-      { title: 'Task nou', detail: 'A fost adăugat un task de sprint local.', createdAt: new Date().toISOString() },
-      { title: 'Backup', detail: 'S-a exportat o copie de siguranță.', createdAt: new Date().toISOString() }
-    ]);
-
-    const save = () => {
-      localStorage.setItem(PROJECT_KEY, JSON.stringify(projects));
-      localStorage.setItem(TASK_KEY, JSON.stringify(tasks));
-      localStorage.setItem(REPO_KEY, JSON.stringify(repos));
-      localStorage.setItem(ACTIVITY_KEY, JSON.stringify(activity));
-    };
-
-    const setMessage = (text) => {
-      document.getElementById('message').textContent = text;
-    };
-
-    const renderProjects = () => {
-      const list = document.getElementById('project-list');
-      list.innerHTML = '';
-      if (!projects.length) {
-        const empty = document.createElement('div');
-        empty.className = 'empty';
-        empty.textContent = 'Fără proiecte. Adaugă unul nou.';
-        list.appendChild(empty);
-        return;
-      }
-      projects.forEach((project, idx) => {
-        const row = document.createElement('div');
-        row.className = 'item';
-        const date = new Date(project.createdAt).toLocaleDateString();
-        row.innerHTML = `<div><strong>${project.name}</strong><small>${date}</small></div><button class="remove" type="button" data-index="${idx}">Șterge</button>`;
-        list.appendChild(row);
-      });
-      list.querySelectorAll('.remove').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const index = Number(btn.dataset.index);
-          projects.splice(index, 1);
-          save();
-          render();
+      const setOptions=(selectId)=>{const select=$(selectId);select.replaceChildren();if(!data.repos.length){const opt=el('option','','No repositories yet');opt.value='';select.append(opt);return}data.repos.forEach(r=>{const opt=el('option','',r.name);opt.value=r.name;select.append(opt)})};
+      const renderRepos=()=>{
+        const hosts=[$('repo-grid'),$('home-repos'),$('explore-grid')];hosts.forEach(h=>h.replaceChildren());
+        if(!data.repos.length){hosts.forEach(h=>empty(h,'Niciun repository. Creează unul ca să începi.'));}
+        data.repos.forEach(repo=>{
+          const card=el('article','card repo-card');const head=el('div','repo-title');const title=el('h3','',repo.name);const badge=el('span','tag',repo.visibility||'Public');head.append(title,badge);const desc=el('p','',repo.description||'No description provided.');const meta=el('small','','Repository · '+(repo.language||'Code')+' · '+timeLabel(repo.createdAt));card.append(head,desc,meta);
+          const del=makeButton('Șterge',()=>{if(!confirm(`Ștergi ${repo.name}?`))return;data.repos=data.repos.filter(x=>x.id!==repo.id);data.issues=data.issues.filter(x=>x.repo!==repo.name);data.pulls=data.pulls.filter(x=>x.repo!==repo.name);log('Repository deleted',repo.name);render()});card.append(document.createElement('br'),del);hosts[0].append(card);
+          const mini=makeItem(repo.name,repo.description||repo.visibility);hosts[1].append(mini);
+          const explore=card.cloneNode(true);hosts[2].append(explore);
         });
-      });
-    };
-
-    const renderTasks = () => {
-      const list = document.getElementById('task-list');
-      list.innerHTML = '';
-      if (!tasks.length) {
-        const empty = document.createElement('div');
-        empty.className = 'empty';
-        empty.textContent = 'Fără task-uri. Adaugă unul nou.';
-        list.appendChild(empty);
-        return;
-      }
-      tasks.forEach((task, idx) => {
-        const row = document.createElement('div');
-        row.className = 'item';
-        row.innerHTML = `<div><strong>${task.name}</strong><small>${task.done ? 'Finalizat' : 'În desfășurare'}</small></div><span class="tag ${task.done ? 'green' : 'orange'}">${task.done ? 'Done' : 'Todo'}</span>`;
-        row.addEventListener('click', () => {
-          tasks[idx].done = !tasks[idx].done;
-          save();
-          render();
-        });
-        const remove = document.createElement('button');
-        remove.type = 'button';
-        remove.className = 'remove';
-        remove.textContent = 'Șterge';
-        remove.addEventListener('click', (event) => {
-          event.stopPropagation();
-          tasks.splice(idx, 1);
-          save();
-          render();
-        });
-        row.appendChild(remove);
-        list.appendChild(row);
-      });
-    };
-
-    const renderRepos = () => {
-      const list = document.getElementById('repo-list');
-      list.innerHTML = '';
-      repos.forEach(repo => {
-        const item = document.createElement('div');
-        item.className = 'repo-item';
-        item.innerHTML = `<strong>${repo.name}</strong><small>${repo.status}</small>`;
-        list.appendChild(item);
-      });
-    };
-
-    const renderActivity = () => {
-      const list = document.getElementById('activity-list');
-      list.innerHTML = '';
-      activity.slice(0, 5).forEach(item => {
-        const row = document.createElement('div');
-        row.className = 'activity';
-        row.innerHTML = `<div><strong>${item.title}</strong><small>${item.detail}</small></div><span class="tag ${item.type || 'orange'}">${new Date(item.createdAt).toLocaleDateString()}</span>`;
-        list.appendChild(row);
-      });
-    };
-
-    const renderStats = () => {
-      document.getElementById('count-projects').textContent = String(projects.length);
-      document.getElementById('count-tasks').textContent = String(tasks.length);
-      document.getElementById('count-repos').textContent = String(repos.length);
-    };
-
-    const render = () => {
-      renderProjects();
-      renderTasks();
-      renderRepos();
-      renderActivity();
-      renderStats();
-    };
-
-    document.getElementById('project-form').addEventListener('submit', (event) => {
-      event.preventDefault();
-      const input = document.getElementById('project-name');
-      const value = input.value.trim();
-      if (!value) return;
-      projects.unshift({ name: value, createdAt: new Date().toISOString() });
-      activity.unshift({ title: 'Project adăugat', detail: `${value} a fost adăugat local.`, createdAt: new Date().toISOString(), type: 'green' });
-      save();
-      input.value = '';
-      render();
-      setMessage('Proiect adăugat local.');
-    });
-
-    document.getElementById('task-form').addEventListener('submit', (event) => {
-      event.preventDefault();
-      const input = document.getElementById('task-name');
-      const value = input.value.trim();
-      if (!value) return;
-      tasks.unshift({ name: value, done: false, createdAt: new Date().toISOString() });
-      activity.unshift({ title: 'Task nou', detail: `${value} este în curs de lucru.`, createdAt: new Date().toISOString(), type: 'orange' });
-      save();
-      input.value = '';
-      render();
-      setMessage('Task salvat local.');
-    });
-
-    document.getElementById('logout').addEventListener('click', () => {
-      localStorage.removeItem(SESSION_KEY);
-      window.location.replace('./auth.html');
-    });
-
-    document.getElementById('export').addEventListener('click', () => {
-      const data = {
-        format: 'github-mini-local-backup',
-        version: 1,
-        exportedAt: new Date().toISOString(),
-        user: getSession(),
-        projects,
-        tasks,
-        repos,
-        activity
+        setOptions('issue-repo');setOptions('pull-repo');
       };
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'github-mini-backup.json';
-      a.click();
-      URL.revokeObjectURL(url);
-      setMessage('Backup JSON exportat.');
-    });
-
-    document.getElementById('import-btn').addEventListener('click', () => document.getElementById('import-file').click());
-    document.getElementById('import-file').addEventListener('change', async (event) => {
-      const file = event.target.files && event.target.files[0];
-      if (!file) return;
-      try {
-        const raw = JSON.parse(await file.text());
-        if (raw.format !== 'github-mini-local-backup' || !Array.isArray(raw.projects) || !Array.isArray(raw.tasks)) {
-          throw new Error('Format invalid pentru backup.');
-        }
-        projects = raw.projects;
-        tasks = raw.tasks;
-        repos = Array.isArray(raw.repos) ? raw.repos : repos;
-        activity = Array.isArray(raw.activity) ? raw.activity : activity;
-        save();
-        render();
-        setMessage('Backup importat cu succes.');
-      } catch (error) {
-        setMessage(error.message || 'Nu s-a putut importa backup-ul.');
-      } finally {
-        event.target.value = '';
-      }
-    });
-
-    render();
+      const renderIssues=()=>{const host=$('issue-list');host.replaceChildren();if(!data.issues.length)empty(host,'Niciun issue. Creează unul mai sus.');data.issues.forEach(issue=>{const state=el('span','tag '+(issue.open?'green':'orange'),issue.open?'Open':'Closed');const toggle=makeButton(issue.open?'Închide':'Redeschide',()=>{issue.open=!issue.open;log(issue.open?'Issue reopened':'Issue closed',issue.title);persist();render()});const del=makeButton('Șterge',()=>{data.issues=data.issues.filter(x=>x.id!==issue.id);log('Issue deleted',issue.title);persist();render()});host.append(makeItem(issue.title,`${issue.repo} · ${timeLabel(issue.createdAt)}`,[state,toggle,del]))})};
+      const renderPulls=()=>{const host=$('pull-list');host.replaceChildren();if(!data.pulls.length)empty(host,'Niciun pull request încă. Creează unul mai sus.');data.pulls.forEach(pr=>{const state=el('span','tag '+(pr.status==='Merged'?'green':'orange'),pr.status||'Open');const toggle=makeButton(pr.status==='Merged'?'Redeschide':'Merge demo',()=>{pr.status=pr.status==='Merged'?'Open':'Merged';log(pr.status==='Merged'?'Pull request merged':'Pull request reopened',pr.title);persist();render()});const del=makeButton('Șterge',()=>{data.pulls=data.pulls.filter(x=>x.id!==pr.id);log('Pull request deleted',pr.title);persist();render()});host.append(makeItem(pr.title,`${pr.repo} · ${timeLabel(pr.createdAt)}`,[state,toggle,del]))})};
+      const renderProjects=()=>{const host=$('project-list');host.replaceChildren();if(!data.projects.length)empty(host,'Nu ai proiecte încă.');data.projects.forEach(p=>{const del=makeButton('Șterge',()=>{data.projects=data.projects.filter(x=>x.id!==p.id);log('Project deleted',p.name);persist();render()});host.append(makeItem(p.name,timeLabel(p.createdAt),[del]))})};
+      const renderTasks=()=>{const host=$('task-list');host.replaceChildren();if(!data.tasks.length)empty(host,'Nu ai task-uri încă.');data.tasks.forEach(task=>{const state=el('span','tag '+(task.done?'green':'orange'),task.done?'Done':'Todo');const toggle=makeButton(task.done?'Redeschide':'Finalizează',()=>{task.done=!task.done;log(task.done?'Task completed':'Task reopened',task.name);persist();render()});const del=makeButton('Șterge',()=>{data.tasks=data.tasks.filter(x=>x.id!==task.id);log('Task deleted',task.name);persist();render()});host.append(makeItem(task.name,timeLabel(task.createdAt),[state,toggle,del]))})};
+      const feedEntry=item=>{const row=el('div','feeditem');const avatar=el('div','avatar','✦');const body=el('div');body.append(el('strong','',item.title),el('p','',item.detail),el('small','',timeLabel(item.createdAt)));row.append(avatar,body);return row};
+      const renderFeed=()=>{const host=$('feed-list');host.replaceChildren();if(!data.activity.length)empty(host,'Feed-ul tău va apărea aici când lucrezi în aplicație.');data.activity.forEach(item=>host.append(feedEntry(item)));const home=$('home-activity');home.replaceChildren();if(!data.activity.length)empty(home,'Nu există activitate încă.');data.activity.slice(0,4).forEach(item=>home.append(feedEntry(item)))};
+      const renderStats=()=>{$('stat-repos').textContent=data.repos.length;$('stat-issues').textContent=data.issues.filter(x=>x.open).length;$('stat-pulls').textContent=data.pulls.filter(x=>x.status!=='Merged').length;$('stat-lessons').textContent=data.completedLessons.length};
+      const news=[['Github Mini primește paginile Home și Feed','Urmărește noutățile demo și activitatea salvată în browser.','Product'],['Explorează proiecte și idei','Folosește Explore pentru a filtra repourile tale locale.','Explore'],['Tutorial for coding','Lecții scurte despre HTML, CSS, JavaScript și Git.','Learn'],['Backup și mod offline','Exportă workspace-ul JSON și importă-l pe alt dispozitiv.','Local']];
+      const renderNews=()=>{const host=$('news-grid');host.replaceChildren();news.forEach(([title,desc,tag])=>{const c=el('article','card news-card');c.append(el('span','tag blue',tag),el('h2','',title),el('p','',desc),el('small','', 'Github Mini · Demo news'));host.append(c)})};
+      const lessons=[
+        {id:'html',title:'1. HTML: structura unei pagini',level:'Începător',description:'Folosește elementele semantice pentru a descrie conținutul.',code:'<main>\n  <h1>Salut, web!</h1>\n  <p>Prima mea pagină.</p>\n</main>',explanation:'HTML descrie structura și sensul conținutului. <main> marchează conținutul principal, <h1> titlul principal, iar <p> un paragraf.'},
+        {id:'css',title:'2. CSS: stiluri și layout',level:'Începător',description:'Aplică culori, spațiere și un layout adaptabil.',code:'カード {\n  padding: 1rem;\n  border-radius: 12px;\n}\n@media (max-width: 600px) {\n  .grid { grid-template-columns: 1fr; }\n}',explanation:'CSS controlează aspectul. Media queries schimbă layout-ul în funcție de lățimea ecranului. În exemplul de mai sus, grila devine o singură coloană pe ecrane înguste.'},
+        {id:'js',title:'3. JavaScript: interacțiune',level:'Începător',description:'Răspunde la un click și actualizează interfața.',code:'const button = document.querySelector("button");\nbutton.addEventListener("click", () => {\n  console.log("Ai apăsat!");\n});',explanation:'JavaScript adaugă comportament. addEventListener atașează o funcție care rulează când apare evenimentul click.'},
+        {id:'git',title:'4. Git: salvează schimbări',level:'Începător',description:'Înțelege add, commit și branch în Git.',code:'git status\ngit add index.html\ngit commit -m "Add first page"\ngit switch -c feature/home',explanation:'Git urmărește istoricul fișierelor. Un commit salvează un set de schimbări; un branch îți permite să lucrezi separat.'},
+        {id:'responsive',title:'5. Responsive design',level:'Intermediar',description:'Creează interfețe utilizabile pe telefon, tabletă și desktop.',code:'/* mobile first */\n.grid { display: grid; grid-template-columns: 1fr; }\n@media (min-width: 800px) {\n  .grid { grid-template-columns: repeat(3, 1fr); }\n}',explanation:'Începe cu layout-ul simplu pentru mobil, apoi adaugă coloane la ecrane mai mari. Folosește viewport meta și ținte de touch suficient de mari.'}
+      ];
+      let activeLesson=null;
+      const renderLessons=()=>{const host=$('lesson-grid');host.replaceChildren();lessons.forEach(lesson=>{const done=data.completedLessons.includes(lesson.id);const c=el('article','card lesson');c.tabIndex=0;c.append(el('span','number',done?'✓ COMPLETAT':lesson.level),el('h3','',lesson.title),el('p','',lesson.description));const open=()=>showLesson(lesson);c.addEventListener('click',open);c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}});host.append(c)});const count=data.completedLessons.filter(id=>lessons.some(l=>l.id===id)).length;$('progress-label').textContent=`${count} / ${lessons.length} lecții`; $('progress-bar').style.width=`${count/lessons.length*100}%`};
+      const showLesson=lesson=>{activeLesson=lesson;const host=$('lesson-detail');host.hidden=false;host.replaceChildren();host.append(el('h2','',lesson.title),el('p','',lesson.explanation));const code=el('pre','codeblock',lesson.code);host.append(code);const done=data.completedLessons.includes(lesson.id);const button=el('button','button primary',done?'Marchează ca nefinalizat':'Marchează lecția terminată');button.type='button';button.addEventListener('click',()=>{if(data.completedLessons.includes(lesson.id))data.completedLessons=data.completedLessons.filter(id=>id!==lesson.id);else data.completedLessons.push(lesson.id);log('Tutorial progress',`${lesson.title}: ${data.completedLessons.includes(lesson.id)?'completed':'reopened'}`);persist();render();showLesson(lesson)});host.append(button)};
+      $('explore-search').addEventListener('input',()=>{const q=$('explore-search').value.toLowerCase();$('explore-grid').querySelectorAll('.repo-card').forEach(card=>card.hidden=!card.textContent.toLowerCase().includes(q))});
+      $('global-search').addEventListener('input',()=>{const q=$('global-search').value.trim().toLowerCase();if(!q)return;setPage('explore');$('explore-search').value=q;$('explore-search').dispatchEvent(new Event('input'))});
+      $('repo-form').addEventListener('submit',e=>{e.preventDefault();const name=$('repo-name').value.trim();if(!name)return;if(data.repos.some(r=>r.name.toLowerCase()===name.toLowerCase())){$('status').textContent='Există deja un repo cu acest nume.';return}const repo={id:crypto.randomUUID(),name,description:$('repo-description').value.trim(),visibility:$('repo-visibility').value,createdAt:now(),language:'Code'};data.repos.unshift(repo);log('Repository created',name);e.target.reset();render();$('status').textContent='Repository creat local.'});
+      $('repo-new-focus').addEventListener('click',()=>$('repo-name').focus());
+      $('issue-form').addEventListener('submit',e=>{e.preventDefault();const title=$('issue-title').value.trim();if(!title||!data.repos.length){$('status').textContent='Creează mai întâi un repository.';return}data.issues.unshift({id:crypto.randomUUID(),title,repo:$('issue-repo').value,open:true,createdAt:now()});log('Issue opened',title);e.target.reset();render();$('status').textContent='Issue creat local.'});
+      $('pull-form').addEventListener('submit',e=>{e.preventDefault();const title=$('pull-title').value.trim();if(!title||!data.repos.length){$('status').textContent='Creează mai întâi un repository.';return}data.pulls.unshift({id:crypto.randomUUID(),title,repo:$('pull-repo').value,status:'Open',createdAt:now()});log('Pull request opened',title);e.target.reset();render();$('status').textContent='Pull request creat local.'});
+      $('project-form').addEventListener('submit',e=>{e.preventDefault();const name=$('project-name').value.trim();if(!name)return;data.projects.unshift({id:crypto.randomUUID(),name,createdAt:now()});log('Project created',name);e.target.reset();render();$('status').textContent='Proiect adăugat.'});
+      $('task-form').addEventListener('submit',e=>{e.preventDefault();const name=$('task-name').value.trim();if(!name)return;data.tasks.unshift({id:crypto.randomUUID(),name,done:false,createdAt:now()});log('Task created',name);e.target.reset();render();$('status').textContent='Task adăugat.'});
+      $('clear-feed').addEventListener('click',()=>{data.activity=[];persist();render();$('status').textContent='Feed șters.'});
+      const backup=()=>({format:'github-mini-workspace',version:2,exportedAt:now(),user:session,data});
+      $('export').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(backup(),null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='github-mini-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('status').textContent='Backup JSON descărcat.'});
+      $('import-button').addEventListener('click',()=>$('import-file').click());
+      $('import-file').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{const raw=JSON.parse(await file.text());if(raw.format!=='github-mini-workspace'||!raw.data||!Array.isArray(raw.data.repos)||!Array.isArray(raw.data.issues)||!Array.isArray(raw.data.pulls))throw new Error('Fișierul nu este un backup Github Mini valid.');data={...data,...raw.data};persist();render();$('status').textContent='Backup importat cu succes.'}catch(err){$('status').textContent=err.message||'Importul a eșuat.'}finally{e.target.value=''}});
+      renderNews();renderLessons();render();
+    })();
   </script>
 </body>
 </html>
