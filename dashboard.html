@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0d1117" />
+  <title>Dashboard — Github Mini</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0d1117;--panel:#161b22;--text:#e6edf3;--muted:#9aa7b5;--border:rgba(148,163,184,.2);--blue:#2f81f7}
+    *{box-sizing:border-box}body{margin:0;min-width:320px;min-height:100vh;background:radial-gradient(ellipse at 50% -20%,rgba(47,129,247,.18),transparent 55%),var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}.container{width:min(1040px,calc(100% - 32px));margin:auto}.header{border-bottom:1px solid var(--border);background:rgba(13,17,23,.9)}.nav{min-height:68px;display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{font-weight:750;text-decoration:none;color:var(--text)}.btn{display:inline-flex;min-height:42px;align-items:center;justify-content:center;padding:8px 14px;border:1px solid var(--border);border-radius:10px;color:var(--text);background:var(--panel);font:inherit;font-weight:650;cursor:pointer;text-decoration:none}.btn:hover{border-color:var(--blue)}main{padding:56px 0}.welcome{padding:clamp(22px,5vw,40px);border:1px solid var(--border);border-radius:20px;background:rgba(22,27,34,.88)}h1{margin:0;font-size:clamp(2rem,6vw,3.2rem);letter-spacing:-.05em}.muted{color:var(--muted)}.user{margin:22px 0;padding:16px;border:1px solid var(--border);border-radius:13px;overflow-wrap:anywhere}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}.card{padding:18px;border:1px solid var(--border);border-radius:15px;background:#111820}.card h2{font-size:1.1rem;margin:0 0 6px}.card p{margin:0;color:var(--muted)}#message{color:#fca5a5}@media(max-width:650px){.grid{grid-template-columns:1fr}.nav{min-height:62px}}
+  </style>
+</head>
+<body>
+  <header class="header"><div class="container nav"><a class="brand" href="./index.html">◈ Github Mini</a><button class="btn" id="logout" type="button">Deconectare</button></div></header>
+  <main class="container"><section class="welcome"><p class="muted">Spațiul tău de lucru</p><h1>Bun venit, <span id="name">developer</span>!</h1><p class="muted">Ești conectat. Acesta este dashboard-ul tău Github Mini.</p><div class="user" id="user"></div><p id="message" role="status" aria-live="polite"></p><div class="grid"><article class="card"><h2>Proiecte</h2><p>Conectează-te și începe să-ți organizezi proiectele.</p></article><article class="card"><h2>Activitate</h2><p>Un singur loc pentru progresul și noutățile tale.</p></article><article class="card"><h2>Colaborare</h2><p>Continuă să construiești împreună cu echipa ta.</p></article></div></section></main>
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+    import { SUPABASE_URL, SUPABASE_ANON_KEY } from './supabase-config.js';
+    const configured=!SUPABASE_URL.includes('YOUR_PROJECT_ID')&&!SUPABASE_ANON_KEY.includes('YOUR_SUPABASE_');
+    const message=document.getElementById('message');
+    if(!configured){message.textContent='Configurează mai întâi URL-ul și cheia publică Supabase în supabase-config.js.';document.getElementById('logout').hidden=true}
+    else{
+      const supabase=createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{flowType:'pkce',persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+      const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+      const render=({user})=>{if(!user){window.location.replace(new URL('./auth.html',window.location.href));return}const name=user.user_metadata?.full_name||user.user_metadata?.name||user.email||'developer';document.getElementById('name').textContent=name;document.getElementById('user').innerHTML=`<strong>${escapeHtml(name)}</strong><br><span class="muted">${escapeHtml(user.email||'')}</span>`};
+      supabase.auth.getUser().then(({data,error})=>{if(error){message.textContent=`Nu s-a putut verifica sesiunea: ${error.message}`;return}if(data.user)render(data);else window.location.replace(new URL('./auth.html',window.location.href))});
+      supabase.auth.onAuthStateChange((_event,session)=>{if(session?.user)render(session);else window.location.replace(new URL('./auth.html',window.location.href))});
+      document.getElementById('logout').addEventListener('click',async()=>{const{error}=await supabase.auth.signOut();if(error)message.textContent=`Deconectarea a eșuat: ${error.message}`});
+    }
+  </script>
+</body>
+</html>
